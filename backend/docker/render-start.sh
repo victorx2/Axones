@@ -3,6 +3,10 @@ set -e
 
 cd /app
 
+if [ -z "$APP_URL" ] && [ -n "$RENDER_EXTERNAL_URL" ]; then
+  export APP_URL="$RENDER_EXTERNAL_URL"
+fi
+
 if [ -z "$APP_KEY" ]; then
   echo "render-start: generando APP_KEY (configura APP_KEY en Render para persistir sesiones)."
   php artisan key:generate --force --no-interaction
@@ -29,7 +33,6 @@ if [ "$USER_COUNT" = "0" ]; then
 fi
 
 php artisan config:cache --no-interaction
-php artisan route:cache --no-interaction
 
 echo "render-start: API en puerto ${PORT:-8080}"
 exec php artisan serve --host=0.0.0.0 --port="${PORT:-8080}"

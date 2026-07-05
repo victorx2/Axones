@@ -1,24 +1,30 @@
-FROM php:8.2-cli-alpine
+FROM php:8.2-cli-bookworm
 
-RUN apk add --no-cache \
-    sqlite-libs \
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    git \
+    unzip \
     libzip-dev \
-    oniguruma-dev \
-    libxml2-dev \
-    && docker-php-ext-install \
+    libsqlite3-dev \
+    libpng-dev \
+    libjpeg62-turbo-dev \
+    libfreetype6-dev \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install -j"$(nproc)" \
     pdo \
     pdo_sqlite \
     mbstring \
     bcmath \
-    xml \
-    zip
+    dom \
+    zip \
+    gd \
+    && rm -rf /var/lib/apt/lists/*
 
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 WORKDIR /app
 
 COPY composer.json composer.lock ./
-RUN composer install --no-dev --optimize-autoloader --no-interaction --no-scripts
+RUN composer install --no-dev --optimize-autoloader --no-interaction --no-scripts --prefer-dist
 
 COPY . .
 
