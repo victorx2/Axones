@@ -2,7 +2,7 @@
 
 Sistema de **producción e inventario** para planta de empaque flexible (impresión, laminación, corte, montaje y tintas). Incluye órdenes de trabajo, control por área (MES), compras, almacén, calidad, despacho y reportes operativos.
 
-Repositorio: [dynastymarketinga/Axones](https://github.com/dynastymarketinga/Axones)
+Repositorio: [victorx2/Axones](https://github.com/victorx2/Axones)
 
 ## Arquitectura
 
@@ -108,7 +108,7 @@ Los usuarios tienen un campo `role` (inventario, impresión, laminación, corte,
 
 ## Licencia
 
-Proyecto privado de Dynasty Marketing / Axones. Uso interno salvo acuerdo explícito.
+Proyecto de portafolio y demostración técnica. El código está visible para fines de showcase; uso comercial o redistribución requieren permiso del autor.
 
 ## Contribuidores
 
