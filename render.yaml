@@ -32,5 +32,3 @@ services:
         value: "false"
       - key: AXONES_PRUEBA_SEED
         value: "1"
-      - key: APP_KEY
-        generateValue: true

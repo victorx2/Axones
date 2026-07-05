@@ -7,8 +7,21 @@ if [ -z "$APP_URL" ] && [ -n "$RENDER_EXTERNAL_URL" ]; then
   export APP_URL="$RENDER_EXTERNAL_URL"
 fi
 
-if [ -z "$APP_KEY" ]; then
-  echo "render-start: generando APP_KEY (configura APP_KEY en Render para persistir sesiones)."
+if [ ! -f .env ]; then
+  cp .env.example .env
+fi
+
+# Render generateValue no produce claves Laravel (base64: + 32 bytes).
+if ! php -r '
+  $k = getenv("APP_KEY") ?: "";
+  if (! str_starts_with($k, "base64:")) {
+      exit(1);
+  }
+  $raw = base64_decode(substr($k, 7), true);
+  exit($raw !== false && strlen($raw) === 32 ? 0 : 1);
+' 2>/dev/null; then
+  echo "render-start: APP_KEY inválida o ausente, generando clave Laravel…"
+  unset APP_KEY
   php artisan key:generate --force --no-interaction
 fi
 
@@ -32,6 +45,7 @@ if [ "$USER_COUNT" = "0" ]; then
   php artisan db:seed --force --no-interaction
 fi
 
+php artisan config:clear --no-interaction 2>/dev/null || true
 php artisan config:cache --no-interaction
 
 echo "render-start: API en puerto ${PORT:-8080}"
