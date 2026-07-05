@@ -1,0 +1,36 @@
+# Blueprint opcional para Render (gratis): https://render.com → New → Blueprint
+# Tras crear el servicio, copia la URL del API en Cloudflare Pages (VITE_API_BASE_URL).
+
+services:
+  - type: web
+    name: axones-api
+    runtime: docker
+    plan: free
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
+    healthCheckPath: /up
+    envVars:
+      - key: APP_ENV
+        value: local
+      - key: APP_DEBUG
+        value: "false"
+      - key: APP_LOCALE
+        value: es
+      - key: LOG_CHANNEL
+        value: stderr
+      - key: DB_CONNECTION
+        value: sqlite
+      - key: DB_DATABASE
+        value: /app/database/database.sqlite
+      - key: SESSION_DRIVER
+        value: file
+      - key: CACHE_STORE
+        value: file
+      - key: QUEUE_CONNECTION
+        value: sync
+      - key: AXONES_ASSISTANT_ENABLED
+        value: "false"
+      - key: AXONES_PRUEBA_SEED
+        value: "1"
+      - key: APP_KEY
+        generateValue: true

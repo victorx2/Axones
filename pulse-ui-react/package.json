@@ -11,6 +11,7 @@
     "build:deploy": "vite build",
     "pwa:icons": "node scripts/generate-pwa-icons.mjs",
     "build:cf": "npm run build && node scripts/prep-cloudflare-subpath.mjs",
+    "build:pages": "npm run build && node scripts/prep-pages-root.mjs",
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "vitest run",

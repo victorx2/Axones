@@ -85,6 +85,7 @@ En `pulse-ui-react/.env`: `VITE_API_BASE_URL` si la API no está en el mismo ori
 
 ## Despliegue
 
+- **Demo gratis (portafolio):** guía paso a paso en [`scripts/DEMO_GRATIS.md`](scripts/DEMO_GRATIS.md) — Cloudflare Pages + Render.
 - CI en cada push/PR: tests PHP, lint y build del front (`.github/workflows/ci.yml`).
 - Deploy automático a servidor con runner self-hosted (`.github/workflows/deploy.yml` + `scripts/deploy.sh`).
 - Guía HTTPS / PWA: `scripts/HTTPS_PRODUCCION.md`.
