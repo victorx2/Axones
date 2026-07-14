@@ -4,7 +4,7 @@ Guía para publicar un demo en internet **sin pagar**, usando tu repo [victorx2/
 
 | Parte | Servicio | Costo | URL ejemplo |
 |-------|----------|-------|-------------|
-| Frontend React | [Cloudflare Pages](https://pages.cloudflare.com) | Gratis | `https://axones-ui.pages.dev` |
+| Frontend React | [Cloudflare Pages](https://pages.cloudflare.com) | Gratis | `https://axones.pages.dev` |
 | API Laravel | [Render](https://render.com) | Gratis* | `https://axones-api.onrender.com` |
 
 \* El plan free de Render **se duerme** tras ~15 min sin visitas. La primera carga puede tardar **1–2 minutos** mientras despierta.
@@ -76,7 +76,7 @@ Entra a [dash.cloudflare.com](https://dash.cloudflare.com) → **Workers & Pages
 ### 2. Conectar GitHub
 
 - Repo: **victorx2/Axones**
-- **Project name:** `axones-ui` (o el que prefieras)
+- **Project name:** `axones` (URL: `https://axones.pages.dev`)
 
 ### 3. Configuración de build
 
@@ -102,17 +102,17 @@ En **Settings → Environment variables** (Production):
 Guarda y espera el build. La URL será algo como:
 
 ```text
-https://axones-ui.pages.dev
+https://axones.pages.dev
 ```
 
 ### 6. Probar el demo
 
-Con `VITE_DEMO_NO_AUTH=1` en `.env.production` (o en Cloudflare Pages), **entra directo** a la app sin pantalla de login.
+Con `VITE_DEMO_NO_AUTH=1` en `.env.production` (o en host `axones.pages.dev`), **entra directo** a la app sin pantalla de login.
 
 Abre en el navegador:
 
 ```text
-https://axones-ui.pages.dev/
+https://axones.pages.dev/
 ```
 
 (Auto-login como `boss` / `password`. La versión con login está en la rama `backup-login-original`.)
@@ -132,7 +132,7 @@ Si desactivas el bypass, usuarios demo (login = **username**, no email; contrase
 En GitHub, README o LinkedIn puedes poner:
 
 - **Código:** https://github.com/victorx2/Axones  
-- **Demo en vivo:** https://axones-ui.pages.dev/auth/basic/login  
+- **Demo en vivo:** https://axones.pages.dev/  
 
 *(Actualiza con tus URLs reales.)*
 
