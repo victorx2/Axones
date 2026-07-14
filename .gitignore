@@ -10,3 +10,10 @@ CONTEXTO-AXONES-V2.md
 PUBLIC-LEGADO.md
 backend/.phpunit.result.cache
 pulse-ui-react/node_modules/
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+.env*
+!.env.example
