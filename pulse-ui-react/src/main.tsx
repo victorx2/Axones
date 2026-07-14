@@ -8,6 +8,7 @@ import UIThemeProvider from "@/providers/ui-theme-provider"
 
 import { registerSW } from "virtual:pwa-register"
 
+import { DemoSessionBootstrap } from "@/components/DemoSessionBootstrap"
 import { router } from "@/routes"
 import { ensureAxonesFavicon } from "@/lib/axones-favicon"
 import "@/index.css"
@@ -31,7 +32,9 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     >
       
       <UIThemeProvider>
-        <RouterProvider router={router} />
+        <DemoSessionBootstrap>
+          <RouterProvider router={router} />
+        </DemoSessionBootstrap>
       </UIThemeProvider>
     </ThemeProvider>
     <Toaster position="top-right" richColors closeButton offset={{ top: "72px", right: "16px" }} />

@@ -24,6 +24,7 @@ import {
 } from "@/components/ui/sidebar"
 import { apiFetch, ApiError } from "@/lib/api"
 import { clearAuthSession } from "@/lib/auth-storage"
+import { isDemoNoAuthEnabled } from "@/lib/demo-auth-flag"
 
 export function NavUser({
   user,
@@ -37,6 +38,10 @@ export function NavUser({
   const { isMobile } = useSidebar()
 
   const logout = useCallback(async () => {
+    if (isDemoNoAuthEnabled()) {
+      toast.message("Demo público: se mantiene la sesión para que puedas explorar.")
+      return
+    }
     try {
       await apiFetch("auth/logout", { method: "POST" })
     } catch (e) {

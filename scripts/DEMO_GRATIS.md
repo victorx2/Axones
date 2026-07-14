@@ -107,19 +107,23 @@ https://axones-ui.pages.dev
 
 ### 6. Probar el demo
 
+Con `VITE_DEMO_NO_AUTH=1` en `.env.production` (o en Cloudflare Pages), **entra directo** a la app sin pantalla de login.
+
 Abre en el navegador:
 
 ```text
-https://axones-ui.pages.dev/auth/basic/login
+https://axones-ui.pages.dev/
 ```
 
-**Usuarios demo** (contraseña: `password`):
+(Auto-login como `boss` / `password`. La versión con login está en la rama `backup-login-original`.)
 
-| Rol | Email |
+Si desactivas el bypass, usuarios demo (login = **username**, no email; contraseña: `password`):
+
+| Rol | Usuario |
 |-----|--------|
-| Jefe | `boss@axones.local` |
-| Inventario | `inventario@axones.local` |
-| Impresión | `impresion@axones.local` |
+| Jefe | `boss` |
+| Inventario | `inventario` |
+| Impresión | `impresion` |
 
 ---
 

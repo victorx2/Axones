@@ -1,5 +1,14 @@
 import { clearAuthSession, getStoredToken } from "@/lib/auth-storage"
 import type { AuthUser } from "@/lib/auth-storage"
+import { isDemoNoAuthEnabled } from "@/lib/demo-auth-flag"
+
+function redirectAfterUnauthorized(): void {
+  const base = import.meta.env.BASE_URL.replace(/\/?$/, "")
+  // En demo público, recargar la app (re-auto-login) en vez del formulario.
+  window.location.assign(
+    isDemoNoAuthEnabled() ? `${base}/resumen` : `${base}/auth/basic/login`,
+  )
+}
 
 export function apiBase(): string {
   const raw = import.meta.env.VITE_API_BASE_URL as string | undefined
@@ -178,8 +187,7 @@ export async function apiFetch<T>(
 
   if (res.status === 401) {
     clearAuthSession()
-    const base = import.meta.env.BASE_URL.replace(/\/?$/, "")
-    window.location.assign(`${base}/auth/basic/login`)
+    redirectAfterUnauthorized()
     throw new ApiError("Sesión expirada o no autorizada.", 401, {})
   }
 
@@ -218,8 +226,7 @@ export async function apiFetchFormData<T>(
 
   if (res.status === 401) {
     clearAuthSession()
-    const base = import.meta.env.BASE_URL.replace(/\/?$/, "")
-    window.location.assign(`${base}/auth/basic/login`)
+    redirectAfterUnauthorized()
     throw new ApiError("Sesión expirada o no autorizada.", 401, {})
   }
 
@@ -253,8 +260,7 @@ export async function apiDownloadFile(
 
   if (res.status === 401) {
     clearAuthSession()
-    const base = import.meta.env.BASE_URL.replace(/\/?$/, "")
-    window.location.assign(`${base}/auth/basic/login`)
+    redirectAfterUnauthorized()
     throw new ApiError("Sesión expirada o no autorizada.", 401, {})
   }
 

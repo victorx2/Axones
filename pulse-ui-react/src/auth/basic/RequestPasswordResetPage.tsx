@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { AtSign, KeyRound, LogIn } from "lucide-react"
-import { Link } from "react-router-dom"
+import { Link, Navigate } from "react-router-dom"
+import { isDemoNoAuthEnabled } from "@/lib/demo-auth-flag"
 import { toast } from "sonner"
 
 import { AuthPageShell } from "@/components/auth/AuthPageShell"
@@ -19,6 +20,10 @@ export default function RequestPasswordResetPage() {
   const [login, setLogin] = useState("")
   const [submitting, setSubmitting] = useState(false)
   const [loginError, setLoginError] = useState<string | undefined>()
+
+  if (isDemoNoAuthEnabled()) {
+    return <Navigate to="/resumen" replace />
+  }
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault()
